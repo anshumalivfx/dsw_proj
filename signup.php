@@ -37,11 +37,11 @@
                         </div>
                         <div class="w3-section">
                             <label>Password</label>
-                            <input class="w3-input w3-border" type="password" name="password" required>
+                            <input class="w3-input w3-border" type="password" name="password" title="minimum 6 characters" required pattern="[^ ]{6,16}" required>
                         </div>
                         <div class="w3-section">
                             <label>Phone</label>
-                            <input class="w3-input w3-border" type="text" name="phone" required>
+                            <input class="w3-input w3-border" type="text" name="phone" required pattern="^\d{10}$" title="10 numeric characters only" required>
                         </div>
                         <div class="w3-section">
                             <label>Address</label>

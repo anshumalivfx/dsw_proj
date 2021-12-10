@@ -121,7 +121,7 @@
 								</select>
 							</div>
 							<div class="form-group center-aligned">
-								<button type="button" class="btn btn-lg btn-default" id="search">Search</button>
+								<input type="submit" class="btn btn-lg btn-default" id="search" />
 							</div>
 </form>
 		</div>
@@ -133,6 +133,46 @@
 		<!-- Display The Search Result -->
 		<?php
 		$host = "localhost";
+		$user = "root";
+		$pass = "";
+		$db = "donate_blood";
+		$conn = new mysqli($host, $user, $pass, $db);
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		}
+		if (isset($_POST['blood_group']) && isset($_POST['city'])) {
+			$blood_group = $_POST['blood_group'];
+			$city = $_POST['city'];
+			$sql = "SELECT * FROM `user` WHERE `blood_group` = '$blood_group' AND `address` = '$city'";
+			$result = $conn->query($sql);
+			if ($result->num_rows > 0) {
+				while ($row = $result->fetch_assoc()) {
+					?>
+					<div class="col-md-4 col-sm-6 col-xs-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-8 col-sm-8 col-xs-8">
+										<h4><?php echo $row['name']; ?></h4>
+										<p><?php echo $row['address']; ?></p>
+										<p><?php echo $row['blood_group']; ?></p>
+										<p><?php echo $row['phone']; ?></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+					<?php
+				}
+			} else {
+				echo "<h3>No Result Found</h3>";
+			}
+		}
+		?>
+
+						
+				
+
 		
 
 </div>
